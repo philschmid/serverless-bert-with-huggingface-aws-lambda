@@ -6,14 +6,14 @@ from model.model import ServerlessModel
 import json
 
 model = ServerlessModel('./model', 'philschmid-models',
-              'sentiment_classifier/german-bert-sentiment.tar.gz')
+                        'qa_english/squad-distilbert.tar.gz')
 
 
 def predict_answer(event, context):
     try:
         print(event['body'])
         body = json.loads(event['body'])
-        answer = model.predict(body['question'],body['context'])
+        answer = model.predict(body['question'], body['context'])
 
         return {
             "statusCode": 200,

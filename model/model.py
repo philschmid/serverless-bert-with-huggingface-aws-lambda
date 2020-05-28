@@ -8,6 +8,8 @@ import base64
 import json
 import re
 
+s3 = boto3.client('s3')
+
 
 class ServerlessModel:
     def __init__(self, model_path=None, s3_bucket=None, file_prefix=None):
@@ -35,7 +37,7 @@ class ServerlessModel:
                     f = tar.extractfile(member)
                     state = torch.load(io.BytesIO(f.read()))
                     model = AutoModelForQuestionAnswering.from_pretrained(
-                        pretrained_model_name_or_path=None, state_dict=state, config=config, return_token_type_ids=True)
+                        pretrained_model_name_or_path=None, state_dict=state, config=config)
             return model
         else:
             raise KeyError('No S3 Bucket and Key Prefix provided')
