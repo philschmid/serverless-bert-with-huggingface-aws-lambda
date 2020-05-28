@@ -9,7 +9,7 @@ provider:
     - Effect: "Allow"
       Action:
         - s3:getObject
-      Resource: arn:aws:s3:::philschmid-models/sentiment_classifier/*
+      Resource: arn:aws:s3:::philschmid-models/qa_english/*
 
 custom:
   pythonRequirements:
