@@ -17,12 +17,7 @@ class ServerlessModel:
             model_path, s3_bucket, file_prefix)
 
     def from_pretrained(self, model_path: str, s3_bucket: str, file_prefix: str):
-        if os.path.isfile(f'{model_path}/pytorch_model.bin'):
-            model = AutoModelForQuestionAnswering.from_pretrained(
-                model_path)
-            config = AutoConfig.from_pretrained(f'{model_path}/config.json')
-        else:
-            model = self.load_model_from_s3(model_path, s3_bucket, file_prefix)
+        model = self.load_model_from_s3(model_path, s3_bucket, file_prefix)
         tokenizer = self.load_tokenizer(model_path)
         return model, tokenizer
 
